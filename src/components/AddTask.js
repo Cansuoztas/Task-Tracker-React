@@ -1,30 +1,36 @@
-import {useState} from 'react'
+import React,{useState} from 'react'
 
+const AddTask = ({addTask}) => {
+    const [text, setText] = useState("");
 
+    const [day, setDay] = useState("")
 
+    const handleSubmit=(e)=>{
 
-const AddTask = () => {
-    const [task,setTask] = useState({task:"",
-date:"",
-isDone:false }
-)
-const handleTask=(e)=>{
-    setTask({...task,[e.target.id]:e.target.value})
-}
+      e.preventDefault();
+      addTask({text,day})
+      // console.log(text);
+      setText("")
+      setDay("")
 
+    }
+    
 
   return (
-    <form className='container'>
-      <label htmlFor="text">Task</label> <br />
-      <input type="text" id='text' value={task.task}  required/>
-     <br />
-     <br />
-      <label htmlFor="day_time">Add Date ⏳ Time</label> <br />
-      <input type="date" id='day_time' value={task.date}  required/>
+ 
+        <form onSubmit={handleSubmit} action="" className='container'>
+        <label htmlFor="text">Task</label> <br />
+        <input type="text" id='text' onChange={(e)=> setText(e.target.value)} value={text} placeholder='AddTask'/>
+
 <br />
 <br />
-      <button onClick={handleTask}>Save Task</button>
-    </form>
+        <label htmlFor="dayTime">Day & Time</label> <br />
+        <input type="date" id='dayTime' onChange={(e)=> setDay(e.target.value)} value={day} placeholder='Add Day & Time'/>
+<br />
+<br />
+        <input type="submit" value="saveTask"/>
+</form>
+    
   )
 }
 
